@@ -1,5 +1,9 @@
-import Image from 'next/image'
+import { Button } from '@/components/ui/button'
 
 export default function Home() {
-  return <main className='text-2xl'>Hello, habit tracker!</main>
+  return (
+    <main className='text-2xl'>
+      <Button>Button</Button>
+    </main>
+  )
 }
