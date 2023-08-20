@@ -1,5 +1,11 @@
+import Container from '@/components/container'
+
 const Page = () => {
-  return <div>Page</div>
+  return (
+    <div className='py-2'>
+      <Container>Page</Container>
+    </div>
+  )
 }
 
 export default Page
