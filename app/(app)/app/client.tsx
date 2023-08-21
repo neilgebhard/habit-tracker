@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
+import Notes from '@/components/notes'
 
 const Client = () => {
   const [date, setDate] = useState<Date | undefined>(new Date())
@@ -18,6 +19,7 @@ const Client = () => {
         onSelect={setDate}
         className='rounded-md border inline-block'
       />
+      <Notes />
     </div>
   )
 }

@@ -3,7 +3,7 @@ import Client from './client'
 
 const Page = () => {
   return (
-    <div className='py-2'>
+    <div className='my-5'>
       <Container>
         <Client />
       </Container>
