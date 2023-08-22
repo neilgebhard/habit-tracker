@@ -1,5 +1,14 @@
-import { Button } from '@/components/ui/button'
+import { auth } from '@clerk/nextjs'
+import { redirect } from 'next/navigation'
 
-export default function Home() {
+const Home = () => {
+  const { userId } = auth()
+
+  if (userId) {
+    redirect('/app')
+  }
+
   return <main>Home (Explanation Page)</main>
 }
+
+export default Home
