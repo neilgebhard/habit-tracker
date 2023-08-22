@@ -1,5 +1,7 @@
 'use client'
 
+import axios from 'axios'
+
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm } from 'react-hook-form'
 import * as z from 'zod'
@@ -29,15 +31,13 @@ const Notes = () => {
   })
 
   // 2. Define a submit handler.
-  function onSubmit(values: z.infer<typeof formSchema>) {
-    // Do something with the form values.
-    // ✅ This will be type-safe and validated.
-    console.log(values)
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    await axios.post('/api/notes', values)
   }
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 mt-5'>
+      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 flex-1'>
         <FormField
           control={form.control}
           name='content'
@@ -52,7 +52,7 @@ const Notes = () => {
             </FormItem>
           )}
         />
-        <Button type='submit'>Submit</Button>
+        <Button type='submit'>Save</Button>
       </form>
     </Form>
   )

@@ -12,7 +12,7 @@ const Client = () => {
   }, [date])
 
   return (
-    <div>
+    <div className='flex gap-4'>
       <Calendar
         mode='single'
         selected={date}

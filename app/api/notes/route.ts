@@ -5,15 +5,24 @@ import { NextResponse } from 'next/server'
 export async function POST(req: Request) {
   try {
     const { userId } = auth()
-    const { content, date } = await req.json()
+    const { content } = await req.json()
 
     if (!userId) {
       return new NextResponse('Unauthorized', { status: 401 })
     }
 
-    if (!content || !date) {
+    if (!content) {
       return new NextResponse('Bad Request', { status: 400 })
     }
+
+    const note = await prisma.notes.create({
+      data: {
+        content,
+        userId,
+      },
+    })
+
+    return NextResponse.json(note)
 
     // await prisma.notes.upsert({
     //   where: {
