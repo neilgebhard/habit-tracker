@@ -17,12 +17,17 @@ import {
 } from '@/components/ui/form'
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from './ui/button'
+import { Note } from '@prisma/client'
 
 const formSchema = z.object({
   content: z.string().min(0),
 })
 
-const Notes = () => {
+type Props = {
+  data: Note
+}
+
+const Notes = ({ data }: Props) => {
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {

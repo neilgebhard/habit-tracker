@@ -8,19 +8,18 @@ const Client = () => {
   const [date, setDate] = useState<Date | undefined>(new Date())
 
   useEffect(() => {
+    // add date to url as a query parameter
+
     console.log(date)
   }, [date])
 
   return (
-    <div className='flex gap-4'>
-      <Calendar
-        mode='single'
-        selected={date}
-        onSelect={setDate}
-        className='rounded-md border inline-block'
-      />
-      <Notes />
-    </div>
+    <Calendar
+      mode='single'
+      selected={date}
+      onSelect={setDate}
+      className='rounded-md border inline-block'
+    />
   )
 }
 
