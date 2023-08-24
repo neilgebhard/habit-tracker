@@ -1,5 +1,5 @@
 import Container from '@/components/container'
-import Client from './calendar'
+import Calendar from '@/components/calendar'
 import { prisma } from '@/lib/db'
 import Notes from '@/components/notes'
 
@@ -27,11 +27,14 @@ const Page = async () => {
     },
   })
 
+  const notes = await prisma.note.findMany()
+
   return (
     <div className='my-5'>
       <Container>
-        <Client />
-        <Notes data={note} />
+        <Calendar />
+        <Notes note={note} />
+        <pre>{JSON.stringify(notes, null, 2)}</pre>
       </Container>
     </div>
   )

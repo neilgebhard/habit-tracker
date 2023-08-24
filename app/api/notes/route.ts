@@ -15,7 +15,7 @@ export async function POST(req: Request) {
       return new NextResponse('Bad Request', { status: 400 })
     }
 
-    const note = await prisma.notes.create({
+    const note = await prisma.note.create({
       data: {
         content,
         userId,

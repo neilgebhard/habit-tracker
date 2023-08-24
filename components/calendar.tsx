@@ -3,11 +3,12 @@
 import { useEffect, useState } from 'react'
 import { Calendar } from '@/components/ui/calendar'
 
-const CalendarClient = () => {
+const Client = () => {
   const [date, setDate] = useState<Date | undefined>(new Date())
 
   useEffect(() => {
-    // add date to url as a query parameter
+    // set start date in url query parameter
+    console.log(date)
   }, [date])
 
   return (
@@ -20,4 +21,4 @@ const CalendarClient = () => {
   )
 }
 
-export default CalendarClient
+export default Client

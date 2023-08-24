@@ -18,31 +18,35 @@ import {
 import { Textarea } from '@/components/ui/textarea'
 import { Button } from './ui/button'
 import { Note } from '@prisma/client'
+import { onSubmit } from '@/actions/actions'
 
 const formSchema = z.object({
-  content: z.string().min(0),
+  content: z.string().min(3),
 })
 
 type Props = {
-  data: Note
+  note: Note | null
 }
 
-const Notes = ({ data }: Props) => {
+const Note = ({ note }: Props) => {
+  console.log(note)
+
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-    defaultValues: {
+    defaultValues: note || {
       content: '',
     },
   })
 
-  // 2. Define a submit handler.
-  async function onSubmit(values: z.infer<typeof formSchema>) {
-    await axios.post('/api/notes', values)
-  }
-
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className='space-y-8 flex-1'>
+      <form
+        onSubmit={form.handleSubmit(async (data) => {
+          await onSubmit(data)
+          form.reset()
+        })}
+        className='space-y-8 flex-1'
+      >
         <FormField
           control={form.control}
           name='content'
@@ -57,10 +61,12 @@ const Notes = ({ data }: Props) => {
             </FormItem>
           )}
         />
-        <Button type='submit'>Save</Button>
+        <Button type='submit' disabled={form.formState.isSubmitting}>
+          {form.formState.isSubmitting ? 'Saving...' : 'Save'}
+        </Button>
       </form>
     </Form>
   )
 }
 
-export default Notes
+export default Note
